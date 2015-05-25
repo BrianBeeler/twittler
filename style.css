@@ -1,0 +1,13 @@
+span.time {
+	color: blue;
+	font-size: 12px;
+}
+.hidden {
+	display: none;
+}
+
+span.user:hover {
+	font-weight:bold;
+}
+
+

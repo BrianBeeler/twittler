@@ -3,24 +3,83 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"
+    
   </head>
   <body>
+      <div id="button">
+      <button type="button"> Click Me!</button>
+      </div>
+
+      <div id="tweets"> </div>  
     <script>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+     
+      function convertTime(milliseconds) {
+        var seconds= Math.round(milliseconds/1000)
+        if (seconds<1) { return " now"}
+        if (seconds>=60) {
+          var minutes = Math.round(seconds/60)
+          if (minutes>=60) {
+            var hours = Math.round(minutes/60)
+            return hours+" hrs ago"
+          }
+          return minutes+ " min ago"
+        }
+        return seconds+ " sec ago"
+      }
 
+       function displayTweets() {
+        var $body = $('#tweets');
+        $body.html('');
         var index = streams.home.length - 1;
         while(index >= 0){
+          // Creates the tweet object
           var tweet = streams.home[index];
+          
+          // Creats new div section corresponding to the tweet
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          // Puts an initial and sign in the tweet div
+          $tweet.text('@');
+          
+          // Creates a span for the user and appends to the tweet div
+          var $user= $("<span class='user'></span>")
+          $user.text(tweet.user)
+          $user.addClass(tweet.user)
+          $user.appendTo($tweet)
+
+          // Appends the rest of tweet 
+          $tweet.append(":"+tweet.message)
+
+          // Calculates time passed in user friendly way and appends to tweet div
+          var timePassed = convertTime( new Date() -tweet.created_at )
+          var $time= $('<span class="time"></span>')
+          $time.text("  "+timePassed)
+          $time.appendTo($tweet)
+
+          //Append the tweet to the tweets id div
+          $tweet.appendTo('#tweets')
+
+          // Decrements index
           index -= 1;
         }
+      }
+      
 
+      $(document).ready(function() {
+        displayTweets()
+        $("button").click(function() {
+        displayTweets()
+          }) 
+        $("span.user").on("click",function() {
+          $("#tweets div").addClass("hidden")
+          var thisUser=$(this).html()
+          var tag="span.user."+thisUser
+          $(tag).closest("div").removeClass("hidden")
+        })
       });
+
+
 
     </script>
   </body>
