@@ -4,18 +4,21 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"
-    
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
   </head>
   <body>
       <h1> Twittler </h1>
+      
       <div id="button">
           <button type="button">See More Tweets!</button>
       </div>
 
       <div id="tweets"> </div>  
 
-    <script>
 
+    <script>
+   
       function convertTime(milliseconds) {
         var seconds= Math.round(milliseconds/1000)
         if (seconds<1) { return " now"}
@@ -63,6 +66,7 @@
 
           // Decrements index
           index -= 1;
+        }
 
           //Set up click listener for clicking on a user
           $("span.user").on("click",function() {
@@ -72,10 +76,7 @@
           var tag="span.user."+thisUser
           $(tag).closest("div").removeClass("hidden")
         })
-
-
-
-        }
+                
       }
       
 
