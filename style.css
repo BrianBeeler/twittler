@@ -1,13 +1,39 @@
 span.time {
 	color: blue;
-	font-size: 12px;
+	font-size: 16px;
+	float: right;
 }
 .hidden {
 	display: none;
+}
+
+span.user {
+	color:blue;
 }
 
 span.user:hover {
 	font-weight:bold;
 }
 
+#button {
+	position: relative;
+	right: -50%
+}
+
+body {
+	background-image: url(http://www.vyroky-slavnych.cz/include/pictures/Zluto%20zelena.jpg) ;
+	background-size: 100% 10000%;
+	background-repeat: no-repeat;
+	font-size: 16px;
+	font-family: "Varela Round", sans-serif;
+}
+
+#tweets div {
+	margin: 20px;
+}
+
+h1 { position: relative; 
+	 right: -50%;
+
+	}
 

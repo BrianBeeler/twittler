@@ -7,14 +7,15 @@
     
   </head>
   <body>
+      <h1> Twittler </h1>
       <div id="button">
-      <button type="button"> Click Me!</button>
+          <button type="button">See More Tweets!</button>
       </div>
 
       <div id="tweets"> </div>  
+
     <script>
 
-     
       function convertTime(milliseconds) {
         var seconds= Math.round(milliseconds/1000)
         if (seconds<1) { return " now"}
@@ -29,9 +30,9 @@
         return seconds+ " sec ago"
       }
 
-       function displayTweets() {
-        var $body = $('#tweets');
-        $body.html('');
+      function displayTweets() {
+        var $tweets = $('#tweets');
+        $tweets.html('');
         var index = streams.home.length - 1;
         while(index >= 0){
           // Creates the tweet object
@@ -58,25 +59,33 @@
           $time.appendTo($tweet)
 
           //Append the tweet to the tweets id div
-          $tweet.appendTo('#tweets')
+          $tweet.appendTo(tweets)
 
           // Decrements index
           index -= 1;
+
+          //Set up click listener for clicking on a user
+          $("span.user").on("click",function() {
+          $("#tweets div").addClass("hidden")
+          console.log("Ran!")
+          var thisUser=$(this).html()
+          var tag="span.user."+thisUser
+          $(tag).closest("div").removeClass("hidden")
+        })
+
+
+
         }
       }
       
 
       $(document).ready(function() {
         displayTweets()
+        
         $("button").click(function() {
         displayTweets()
           }) 
-        $("span.user").on("click",function() {
-          $("#tweets div").addClass("hidden")
-          var thisUser=$(this).html()
-          var tag="span.user."+thisUser
-          $(tag).closest("div").removeClass("hidden")
-        })
+       
       });
 
 
